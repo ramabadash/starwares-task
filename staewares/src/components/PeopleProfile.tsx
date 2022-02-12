@@ -1,13 +1,23 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Front-end routers
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom'; // Front-end routers
 
 // types
 import { PeopleObj } from '../@types/types';
 
+// Context
+import ApiContext from '../contexts/ApiContext';
+
+// Style
+import '../styles/PeopleProfile.css';
+
 // ---------- PeopleProfile - COMPONENT ---------- //
 
-function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
+function PeopleProfile() {
+  const [profileData, setProfileData] = useState<PeopleObj | undefined>(undefined);
+  const [name, setName] = useState(useParams().name);
+  const { peopleData } = useContext(ApiContext);
+
   // ----- STATES ----- //
   const [homeWorldData, setHomeWorldData] = useState<string>('');
   const [vehicles, setVehicles] = useState<string[]>([]);
@@ -17,6 +27,8 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
 
   // ----- EFFECTS ----- //
   useEffect(() => {
+    setProfileData(() => peopleData!.find((people: PeopleObj) => people.name === name));
+
     if (profileData) {
       getHomeworld();
       getVehicles();
@@ -30,8 +42,10 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
   // Get persons homeworld
   const getHomeworld = async () => {
     try {
-      const { data } = await axios.get(profileData.homeworld);
-      setHomeWorldData(data.name);
+      if (profileData) {
+        const { data } = await axios.get(profileData.homeworld);
+        setHomeWorldData(data.name);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -39,9 +53,11 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
   // Get persons vehicles
   const getVehicles = async () => {
     try {
-      for (const url of profileData.vehicles) {
-        const { data } = await axios.get(url);
-        setVehicles(prevVehicles => [...prevVehicles, data.name]);
+      if (profileData) {
+        for (const url of profileData.vehicles) {
+          const { data } = await axios.get(url);
+          setVehicles(prevVehicles => [...prevVehicles, data.name]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -51,9 +67,11 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
   // Get persons films
   const getFilms = async () => {
     try {
-      for (const url of profileData.films) {
-        const { data } = await axios.get(url);
-        setFilms(prevFilms => [...prevFilms, data.title]);
+      if (profileData) {
+        for (const url of profileData.films) {
+          const { data } = await axios.get(url);
+          setFilms(prevFilms => [...prevFilms, data.title]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -63,9 +81,11 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
   // Get persons starships
   const getStarships = async () => {
     try {
-      for (const url of profileData.starships) {
-        const { data } = await axios.get(url);
-        setStarships(prevStarships => [...prevStarships, data.name]);
+      if (profileData) {
+        for (const url of profileData.starships) {
+          const { data } = await axios.get(url);
+          setStarships(prevStarships => [...prevStarships, data.name]);
+        }
       }
     } catch (error) {}
   };
@@ -73,9 +93,11 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
   // Get persons starships
   const getSpecies = async () => {
     try {
-      for (const url of profileData.species) {
-        const { data } = await axios.get(url);
-        setSpecies(prevSpecies => [...prevSpecies, data.name]);
+      if (profileData) {
+        for (const url of profileData.species) {
+          const { data } = await axios.get(url);
+          setSpecies(prevSpecies => [...prevSpecies, data.name]);
+        }
       }
     } catch (error) {}
   };
@@ -85,35 +107,76 @@ function PeopleProfile({ profileData }: { profileData: PeopleObj }) {
 
   return (
     <div>
-      <button onClick={() => navigate('/')}>Back to home page</button>
-      {profileData ? (
-        <div>
-          <h2>{profileData.name} Profile</h2>
-          <h3>From movies : {films}</h3>
-          <h3>{profileData.gender}</h3>
-          <h3>Born in : {profileData.birth_year}</h3>
-          <h3>Body shape:</h3>
-          <p>
-            {profileData.height} CM | {profileData.mass} KG |
-          </p>
-          <p>
-            Eyes:{profileData.eye_color} | Hair: {profileData.hair_color} | Skin:{' '}
-            {profileData.skin_color}
-          </p>
+      <button className='back-to-home' onClick={() => navigate('/')}>
+        <i className='fa-solid fa-house'></i>
+      </button>
+      <div className='profile-container'>
+        {profileData ? (
+          <div>
+            <h2>
+              <i className='fa-solid fa-user'></i> Profile : {profileData.name}{' '}
+            </h2>
 
-          <h3>Star Wares things:</h3>
-          <p>Home world: {homeWorldData.length ? homeWorldData : 'No homeworld'}</p>
-          <p>Drive on: {vehicles.length ? vehicles : 'No vehicles'}</p>
-          <p>Starships: {starships.length ? starships : 'No starships'}</p>
-          <p>Species: {species.length ? species : 'No species'}</p>
+            {/* Gender */}
+            <h3>
+              {profileData.gender}{' '}
+              {profileData.gender === 'male' ? (
+                <i className='fa-solid fa-mars'></i>
+              ) : profileData.gender === 'female' ? (
+                <i className='fa-solid fa-venus'></i>
+              ) : (
+                <i className='fa-solid fa-mars-and-venus'></i>
+              )}
+            </h3>
 
-          <p>
-            Profile created at : {profileData.created}, Update at: {profileData.edited}{' '}
-          </p>
-        </div>
-      ) : (
-        <div>404 Not Found</div>
-      )}
+            <h3>Born in : {profileData.birth_year}</h3>
+            {/* Body shape */}
+            <div className='body-shape'>
+              <h3>
+                <i className='fa-solid fa-user-astronaut'></i> Body shape:
+              </h3>
+              <span className='profile-span'>
+                {profileData.height} CM | {profileData.mass} KG
+              </span>
+              <span className='profile-span'>
+                <i className='fa-solid fa-eye'></i> Eyes:{profileData.eye_color} |{' '}
+                <i className='fa-solid fa-user'></i> {'  '}Hair: {profileData.hair_color} |{' '}
+                <i className='fa-solid fa-hand-dots'></i> {'  '}Skin: {profileData.skin_color}
+              </span>
+            </div>
+
+            {/* STAR WARES THINGS */}
+            <div className='star-wares-things'>
+              <h3>
+                <i className='fa-solid fa-star'></i> Star Wares things:
+              </h3>
+              <p>
+                <i className='fa-solid fa-earth-asia'></i> Home world:{' '}
+                {homeWorldData.length ? homeWorldData : 'No homeworld'}
+              </p>
+              <p>
+                <i className='fa-solid fa-rocket'></i> {'  '}Drive on:{' '}
+                {vehicles.length ? vehicles.join(', ') : 'No vehicles'}
+              </p>
+              <p>Starships: {starships.length ? starships : 'No starships'}</p>
+              <p>Species: {species.length ? species.join(' , ') : 'No species'}</p>
+            </div>
+
+            <div>
+              <h3>
+                <i className='fa-solid fa-video'></i> {'  '}From movies :{' '}
+              </h3>
+              {films.length > 0 ? films.join(' | ') : 'No movies'}
+            </div>
+
+            <p>
+              Profile created at : {profileData.created}, Update at: {profileData.edited}{' '}
+            </p>
+          </div>
+        ) : (
+          <div>404 Not Found</div>
+        )}
+      </div>
     </div>
   );
 }
