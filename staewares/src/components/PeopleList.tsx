@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Front-end routers
 // Components
 import SearchBar from './SearchBar';
+// Style
+import '../styles/PeopleList.css';
 // types
 import { PeopleObj } from '../@types/types';
 interface Props {
@@ -9,20 +11,23 @@ interface Props {
   peopleData: PeopleObj[];
   setFilteredPeople: React.Dispatch<React.SetStateAction<PeopleObj[]>>;
 }
+
 // ---------- PeopleList - COMPONENT ---------- //
 
 function PeopleList({ filteredPeople, peopleData, setFilteredPeople }: Props) {
+  // ----- FUNCTIONS ----- //
   const navigate = useNavigate();
+
   return (
     <div>
       <SearchBar peopleData={peopleData} setFilteredPeople={setFilteredPeople} />
-      <ul>
+      <ul className='people-list'>
         {filteredPeople.length ? (
           filteredPeople.map(({ name, url }: { name: string; url: string }) => (
             <li
               key={url}
               onClick={() => {
-                navigate(`/name`);
+                navigate(`/${name}`);
               }}
             >
               {name}
