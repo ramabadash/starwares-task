@@ -12,7 +12,6 @@ ReactDOM.render(
     <ApiProvider>
       <App />
     </ApiProvider>
-    ,
   </React.StrictMode>,
   document.getElementById('root')
 );

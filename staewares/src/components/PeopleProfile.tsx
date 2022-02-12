@@ -110,68 +110,81 @@ function PeopleProfile() {
       <button className='back-to-home' onClick={() => navigate('/')}>
         <i className='fa-solid fa-house'></i>
       </button>
-      <div className='profile-container'>
+      <div>
         {profileData ? (
-          <div>
-            <h2>
-              <i className='fa-solid fa-user'></i> Profile : {profileData.name}{' '}
-            </h2>
-
-            {/* Gender */}
-            <h3>
-              {profileData.gender}{' '}
-              {profileData.gender === 'male' ? (
-                <i className='fa-solid fa-mars'></i>
-              ) : profileData.gender === 'female' ? (
-                <i className='fa-solid fa-venus'></i>
-              ) : (
-                <i className='fa-solid fa-mars-and-venus'></i>
-              )}
-            </h3>
-
-            <h3>Born in : {profileData.birth_year}</h3>
-            {/* Body shape */}
-            <div className='body-shape'>
-              <h3>
-                <i className='fa-solid fa-user-astronaut'></i> Body shape:
-              </h3>
-              <span className='profile-span'>
-                {profileData.height} CM | {profileData.mass} KG
-              </span>
-              <span className='profile-span'>
-                <i className='fa-solid fa-eye'></i> Eyes:{profileData.eye_color} |{' '}
-                <i className='fa-solid fa-user'></i> {'  '}Hair: {profileData.hair_color} |{' '}
-                <i className='fa-solid fa-hand-dots'></i> {'  '}Skin: {profileData.skin_color}
-              </span>
-            </div>
-
-            {/* STAR WARES THINGS */}
-            <div className='star-wares-things'>
-              <h3>
-                <i className='fa-solid fa-star'></i> Star Wares things:
-              </h3>
-              <p>
-                <i className='fa-solid fa-earth-asia'></i> Home world:{' '}
-                {homeWorldData.length ? homeWorldData : 'No homeworld'}
-              </p>
-              <p>
-                <i className='fa-solid fa-rocket'></i> {'  '}Drive on:{' '}
-                {vehicles.length ? vehicles.join(', ') : 'No vehicles'}
-              </p>
-              <p>Starships: {starships.length ? starships : 'No starships'}</p>
-              <p>Species: {species.length ? species.join(' , ') : 'No species'}</p>
-            </div>
-
+          <div className='profile-container'>
             <div>
-              <h3>
-                <i className='fa-solid fa-video'></i> {'  '}From movies :{' '}
-              </h3>
-              {films.length > 0 ? films.join(' | ') : 'No movies'}
+              <h2>
+                <i className='fa-solid fa-user'></i> Profile : {profileData.name}{' '}
+              </h2>
             </div>
+            <div className='inner-container'>
+              <div>
+                {/* Gender */}
+                <h3>
+                  Gender: {profileData.gender}{' '}
+                  {profileData.gender === 'male' ? (
+                    <i className='fa-solid fa-mars'></i>
+                  ) : profileData.gender === 'female' ? (
+                    <i className='fa-solid fa-venus'></i>
+                  ) : (
+                    <i className='fa-solid fa-mars-and-venus'></i>
+                  )}{' '}
+                  , Born in : {profileData.birth_year}
+                </h3>
+              </div>
 
-            <p>
-              Profile created at : {profileData.created}, Update at: {profileData.edited}{' '}
-            </p>
+              {/* Body shape */}
+              <div className='body-shape'>
+                <h3>
+                  <i className='fa-solid fa-user-astronaut'></i> Body shape:
+                </h3>
+                <span className='profile-span'>{profileData.height} CM</span>
+                <span className='profile-span'>{profileData.mass} KG</span>
+                <span className='profile-span'>
+                  <i className='fa-solid fa-eye'></i> Eyes: {profileData.eye_color}
+                </span>
+                <span className='profile-span'>
+                  <i className='fa-solid fa-user'></i> {'  '}Hair: {profileData.hair_color}
+                </span>
+                <span className='profile-span'>
+                  <i className='fa-solid fa-hand-dots'></i> {'  '}Skin: {profileData.skin_color}
+                </span>
+              </div>
+
+              {/* STAR WARES THINGS */}
+              <div className='star-wares-things'>
+                <h3>
+                  <i className='fa-solid fa-star'></i> Star Wares things:
+                </h3>
+                <p>
+                  <i className='fa-solid fa-earth-asia'></i> Home world:{' '}
+                  {homeWorldData.length ? homeWorldData : 'No homeworld'}
+                </p>
+                <p>
+                  <i className='fa-solid fa-dharmachakra'></i> {'  '}Drive on:{' '}
+                  {vehicles.length ? vehicles.join(', ') : 'No vehicles'}
+                </p>
+                <p>
+                  <i className='fa-solid fa-rocket'></i> Starships:{' '}
+                  {starships.length ? starships : 'No starships'}
+                </p>
+                <p>Species: {species.length ? species.join(' , ') : 'No species'}</p>
+              </div>
+
+              <div>
+                <h3>
+                  <i className='fa-solid fa-video'></i> {'  '}From movies :{' '}
+                </h3>
+                {films.length > 0 ? films.join(' | ') : 'No movies'}
+              </div>
+
+              <div>
+                <p>
+                  Profile created at : {profileData.created}, Update at: {profileData.edited}{' '}
+                </p>
+              </div>
+            </div>
           </div>
         ) : (
           <div>404 Not Found</div>

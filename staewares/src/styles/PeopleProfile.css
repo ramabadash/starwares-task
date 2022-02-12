@@ -1,16 +1,43 @@
 .profile-container {
   text-align: left;
+  padding: 1em;
+  margin: auto;
+}
+
+.profile-container h2 {
+  text-align: center;
+}
+
+.profile-container h3 {
+  text-align: center;
+}
+
+.profile-container div {
+  width: 80%;
+  margin: auto;
+  border-top: black solid 1px;
+  padding: 1em;
   background-color: rgba(160, 153, 95, 0.4);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  padding: 1em;
-  height: 80vh;
+  margin-bottom: 0.5em;
+}
+
+.inner-container {
+  height: 60vh;
   overflow-y: auto;
-  display: flex;
-  flex-direction: row;
+}
+.profile-container div:first-child {
+  border-top: none;
 }
 
 .profile-span {
-  display: block;
+  display: inline-block;
+  margin: 0.5em 1em;
+  text-align: center;
+}
+
+.body-shape {
+  text-align: center;
 }
 
 .back-to-home {

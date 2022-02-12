@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+// Style
+import '../styles/SearchBar.css';
 
 // ---------- SearchBar - COMPONENT ---------- //
 
