@@ -1,6 +1,5 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Front-end routers
+import React, { useContext } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Front-end routers
 
 // Components
 import PeopleList from './PeopleList';
@@ -8,9 +7,6 @@ import PeopleProfile from './PeopleProfile';
 
 // Context
 import ApiContext from '../contexts/ApiContext';
-
-// types
-import { PeopleObj } from '../@types/types';
 
 // ---------- App - COMPONENT ---------- //
 
