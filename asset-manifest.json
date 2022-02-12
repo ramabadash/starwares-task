@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/starwares-task/static/css/main.7863414b.css",
-    "main.js": "/starwares-task/static/js/main.585c5855.js",
+    "main.js": "/starwares-task/static/js/main.5e0b2fdb.js",
     "index.html": "/starwares-task/index.html",
     "main.7863414b.css.map": "/starwares-task/static/css/main.7863414b.css.map",
-    "main.585c5855.js.map": "/starwares-task/static/js/main.585c5855.js.map"
+    "main.5e0b2fdb.js.map": "/starwares-task/static/js/main.5e0b2fdb.js.map"
   },
   "entrypoints": [
     "static/css/main.7863414b.css",
-    "static/js/main.585c5855.js"
+    "static/js/main.5e0b2fdb.js"
   ]
 }
