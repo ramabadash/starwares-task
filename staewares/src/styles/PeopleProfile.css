@@ -1,0 +1,27 @@
+.profile-container {
+  text-align: left;
+  background-color: rgba(160, 153, 95, 0.4);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 1em;
+  height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-span {
+  display: block;
+}
+
+.back-to-home {
+  font-size: 1.5em;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #ffc107;
+  transition: top ease 0.5s;
+}
+
+.back-to-home:hover {
+  font-size: 1.6em;
+}
