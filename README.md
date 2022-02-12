@@ -6,6 +6,10 @@
 
 ---
 
+### ✨ [My app](https://ramabadash.github.io/starwares-task/) ✨
+
+---
+
 ## Technologies in use 💻⚙
 
 - ### **React - contextApi, frontend routers**
